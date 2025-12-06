@@ -38,6 +38,10 @@
       overflow-x: hidden;
     }
 
+    body.loading {
+      overflow: hidden;
+    }
+
     /* Floating sparkles background */
     body::before {
       content: "";
@@ -144,6 +148,146 @@
 
     .music-toggle.on .music-toggle__dot {
       background: #f8cf82;
+    }
+
+    /* Music Player Panel */
+    .music-player {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(16px);
+      border-radius: 20px;
+      padding: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+      min-width: 280px;
+      max-width: 320px;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(20px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .music-player.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+    }
+
+    .music-player-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .music-player-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .music-player-close {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: var(--text-muted);
+      padding: 4px;
+      line-height: 1;
+      transition: color 0.2s ease;
+    }
+
+    .music-player-close:hover {
+      color: var(--text-main);
+    }
+
+    .music-player-current {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      text-align: center;
+      min-height: 20px;
+    }
+
+    .music-player-current strong {
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .music-player-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .music-btn {
+      background: rgba(244, 166, 198, 0.2);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: var(--text-main);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .music-btn:hover {
+      background: rgba(244, 166, 198, 0.3);
+      transform: scale(1.1);
+    }
+
+    .music-btn.play-pause {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #fcb7d0, #f8cf82);
+      color: #43253a;
+      font-size: 1.1rem;
+    }
+
+    .music-btn.play-pause:hover {
+      background: linear-gradient(135deg, #f8a5c5, #f5c570);
+    }
+
+    .music-playlist {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-top: 12px;
+      border-top: 1px solid rgba(244, 166, 198, 0.2);
+      padding-top: 12px;
+    }
+
+    .music-playlist-item {
+      padding: 8px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      transition: background 0.2s ease, color 0.2s ease;
+      margin-bottom: 4px;
+    }
+
+    .music-playlist-item:hover {
+      background: rgba(244, 166, 198, 0.1);
+      color: var(--text-main);
+    }
+
+    .music-playlist-item.active {
+      background: rgba(244, 166, 198, 0.2);
+      color: var(--text-main);
+      font-weight: 600;
+    }
+
+    .music-playlist-item.active::before {
+      content: "♪ ";
+      color: var(--accent);
     }
 
     /* Hero section */
@@ -1285,11 +1429,89 @@
     .hero-photo-placeholder {
       cursor: pointer;
     }
+
+    /* Loading Page Styles */
+    .loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #ffeaf4, #fff8e8);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 1;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .loading-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loading-image {
+      max-width: 80%;
+      max-height: 60vh;
+      width: auto;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+      animation: fadeInScale 1s ease;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid rgba(244, 166, 198, 0.3);
+      border-top: 4px solid #f4a6c6;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-top: 30px;
+    }
+
+    @keyframes fadeInScale {
+      0% {
+        opacity: 0;
+        transform: scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-text {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
   </style>
 </head>
 <body>
   <!-- Confetti library (only external dependency) -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Loading Screen -->
+  <div id="loadingScreen" class="loading-screen">
+    <img src="ressources/11.jpg" alt="Loading" class="loading-image">
+    <div class="loading-spinner"></div>
+    <div class="loading-text">Loading your special day...</div>
+  </div>
 
   <!-- Lightbox -->
   <div id="lightbox" class="lightbox">
@@ -1323,10 +1545,25 @@
       </div>
     </nav>
 
-    <!-- Hidden audio (replace src with your own mp3 path if you have one) -->
-    <audio id="bgMusic" loop>
-      <source src="ressources/music.mp3" type="audio/mpeg" />
-    </audio>
+    <!-- Music Player -->
+    <div id="musicPlayer" class="music-player">
+      <div class="music-player-header">
+        <div class="music-player-title">🎵 Music Player</div>
+        <button class="music-player-close" id="musicPlayerClose" type="button">×</button>
+      </div>
+      <div class="music-player-current" id="musicCurrent">
+        <strong>No track selected</strong>
+      </div>
+      <div class="music-player-controls">
+        <button class="music-btn" id="musicPrev" type="button" title="Previous">⏮</button>
+        <button class="music-btn play-pause" id="musicPlayPause" type="button" title="Play/Pause">▶</button>
+        <button class="music-btn" id="musicNext" type="button" title="Next">⏭</button>
+      </div>
+      <div class="music-playlist" id="musicPlaylist"></div>
+    </div>
+
+    <!-- Hidden audio -->
+    <audio id="bgMusic"></audio>
 
     <!-- Hero / Opening -->
     <section id="hero" class="hero fade-section">
@@ -1590,48 +1827,43 @@
         <div class="section-body">
           <p>
             You’re not just “a good friend.” You are the kind of person who quietly rewires what someone
-            believes about love, loyalty, and feeling safe.
+            believes about love, loyalty, and feeling safe. Inssen i3ez 3liya barcha w ay 7aja i7ibha 3aynaya lih 🤍🤍 
           </p>
           <ul class="special-list">
             <li class="special-item">
               <span class="special-icon">🤍</span>
               <span>
-                The way you listen like every word matters — no distractions, no rushing, just pure presence.
+                To7ktek eli hiya 3ssal el denya 
               </span>
             </li>
             <li class="special-item">
               <span class="special-icon">🌤️</span>
               <span>
-                Your laugh. The way it fills a room, softens the edges of a hard day, and makes everything
-                feel lighter.
+                ki tebda tetnamer 3liya w ena nibda nistfaz fik w ba3d tathrabni 😁😂🤍
               </span>
             </li>
             <li class="special-item">
-              <span class="special-icon">🧠</span>
+              <span class="special-icon">🤍</span>
               <span>
-                Your brain — sharp, curious, brilliantly silly when it wants to be, and always full of the
-                most unexpected thoughts.
+                9albik labyath kifech ki t7ib 3abd t7ibo men 9albik w t7ib dima tfar7o 🤍🤍
               </span>
             </li>
             <li class="special-item">
               <span class="special-icon">🛟</span>
               <span>
-                The way you show up when things aren’t pretty. You don’t run from the messy parts; you sit
-                with them, holding space and holding hands.
+                ki tabda ta3mel wejhik kel fo9ma 🙄😂😂😂😂🤍
               </span>
             </li>
             <li class="special-item">
               <span class="special-icon">✨</span>
               <span>
-                How you somehow make people feel seen — like they matter, like they are allowed to take up
-                space exactly as they are.
+                ostouuuuurraaaaaaaaaa
               </span>
             </li>
             <li class="special-item">
               <span class="special-icon">🌱</span>
               <span>
-                Your growth. Watching you become more you every year is one of my favorite things in the
-                world.
+                yaaaaa ghooooolllliiiiiiiiii 🤍🤍
               </span>
             </li>
           </ul>
@@ -1807,6 +2039,24 @@
   </div>
 
   <script>
+    // Loading Screen
+    document.body.classList.add("loading");
+    
+    window.addEventListener("load", () => {
+      const loadingScreen = document.getElementById("loadingScreen");
+      if (loadingScreen) {
+        // Wait a bit to show the loading screen, then fade out
+        setTimeout(() => {
+          loadingScreen.classList.add("hidden");
+          document.body.classList.remove("loading");
+          // Remove from DOM after animation
+          setTimeout(() => {
+            loadingScreen.style.display = "none";
+          }, 500);
+        }, 1500); // Show loading screen for 1.5 seconds minimum
+      }
+    });
+
     // Confetti on load + button
     function launchConfettiBurst() {
       if (typeof confetti === "undefined") return;
@@ -1835,7 +2085,13 @@
     }
 
     window.addEventListener("load", () => {
-      setTimeout(launchConfettiBurst, 600);
+      // Wait for loading screen to finish before showing confetti
+      setTimeout(() => {
+        const loadingScreen = document.getElementById("loadingScreen");
+        if (!loadingScreen || loadingScreen.classList.contains("hidden")) {
+          setTimeout(launchConfettiBurst, 300);
+        }
+      }, 2000);
     });
 
     const celebrateBtn = document.getElementById("celebrateBtn");
@@ -1846,12 +2102,88 @@
       });
     }
 
-    // Background music toggle
+    // Music Playlist System
+    const musicPlaylist = [
+      { name: "Birthday Song", src: "ressources/music.mp3" },
+      // Add more songs here:
+      // { name: "Song 2", src: "ressources/song2.mp3" },
+      // { name: "Song 3", src: "ressources/song3.mp3" },
+    ];
+
     const musicToggle = document.getElementById("musicToggle");
+    const musicPlayer = document.getElementById("musicPlayer");
+    const musicPlayerClose = document.getElementById("musicPlayerClose");
+    const musicPlayPause = document.getElementById("musicPlayPause");
+    const musicPrev = document.getElementById("musicPrev");
+    const musicNext = document.getElementById("musicNext");
+    const musicCurrent = document.getElementById("musicCurrent");
+    const musicPlaylistContainer = document.getElementById("musicPlaylist");
     const bgMusic = document.getElementById("bgMusic");
 
+    let currentTrackIndex = 0;
     let isMusicOn = false;
 
+    // Initialize playlist
+    function initPlaylist() {
+      if (!musicPlaylistContainer) return;
+      
+      musicPlaylistContainer.innerHTML = "";
+      musicPlaylist.forEach((track, index) => {
+        const item = document.createElement("div");
+        item.className = "music-playlist-item";
+        if (index === currentTrackIndex) {
+          item.classList.add("active");
+        }
+        item.textContent = track.name;
+        item.addEventListener("click", () => {
+          playTrack(index);
+        });
+        musicPlaylistContainer.appendChild(item);
+      });
+    }
+
+    // Play a specific track
+    function playTrack(index) {
+      if (index < 0 || index >= musicPlaylist.length) return;
+      
+      currentTrackIndex = index;
+      const track = musicPlaylist[index];
+      
+      bgMusic.src = track.src;
+      bgMusic.load();
+      
+      // Update UI
+      updateCurrentTrack();
+      updatePlaylistActive();
+      
+      // Auto-play if music was already on
+      if (isMusicOn) {
+        bgMusic.play().catch(e => {
+          console.warn("Unable to play music:", e);
+        });
+      }
+    }
+
+    // Update current track display
+    function updateCurrentTrack() {
+      if (musicCurrent && musicPlaylist[currentTrackIndex]) {
+        musicCurrent.innerHTML = `<strong>${musicPlaylist[currentTrackIndex].name}</strong>`;
+      }
+    }
+
+    // Update active playlist item
+    function updatePlaylistActive() {
+      const items = musicPlaylistContainer.querySelectorAll(".music-playlist-item");
+      items.forEach((item, index) => {
+        if (index === currentTrackIndex) {
+          item.classList.add("active");
+        } else {
+          item.classList.remove("active");
+        }
+      });
+    }
+
+    // Update music toggle
     function updateMusicToggle() {
       if (!musicToggle) return;
       musicToggle.classList.toggle("on", isMusicOn);
@@ -1859,17 +2191,37 @@
       if (label) {
         label.textContent = isMusicOn ? "Music on" : "Music off";
       }
+      if (musicPlayPause) {
+        musicPlayPause.textContent = isMusicOn ? "⏸" : "▶";
+      }
     }
 
-    if (musicToggle && bgMusic) {
-      musicToggle.addEventListener("click", async () => {
+    // Toggle music player panel
+    if (musicToggle && musicPlayer) {
+      musicToggle.addEventListener("click", () => {
+        musicPlayer.classList.toggle("show");
+      });
+    }
+
+    // Close music player
+    if (musicPlayerClose) {
+      musicPlayerClose.addEventListener("click", () => {
+        musicPlayer.classList.remove("show");
+      });
+    }
+
+    // Play/Pause button
+    if (musicPlayPause && bgMusic) {
+      musicPlayPause.addEventListener("click", async () => {
         try {
           if (!isMusicOn) {
-            // Only attempt to play if a source is actually set
-            const src = bgMusic.querySelector("source")?.getAttribute("src");
-            if (!src) {
-              alert("You can add a song by editing this page and setting your own MP3 file. 🎵");
+            if (musicPlaylist.length === 0) {
+              alert("No songs in playlist. Add songs to the musicPlaylist array in the code. 🎵");
               return;
+            }
+            // Load first track if not loaded
+            if (!bgMusic.src) {
+              playTrack(0);
             }
             await bgMusic.play();
             isMusicOn = true;
@@ -1879,10 +2231,51 @@
           }
           updateMusicToggle();
         } catch (e) {
-          console.warn("Unable to play music automatically:", e);
+          console.warn("Unable to play music:", e);
         }
       });
     }
+
+    // Next track
+    if (musicNext) {
+      musicNext.addEventListener("click", () => {
+        const nextIndex = (currentTrackIndex + 1) % musicPlaylist.length;
+        playTrack(nextIndex);
+        if (isMusicOn) {
+          bgMusic.play().catch(e => console.warn("Unable to play:", e));
+        }
+      });
+    }
+
+    // Previous track
+    if (musicPrev) {
+      musicPrev.addEventListener("click", () => {
+        const prevIndex = (currentTrackIndex - 1 + musicPlaylist.length) % musicPlaylist.length;
+        playTrack(prevIndex);
+        if (isMusicOn) {
+          bgMusic.play().catch(e => console.warn("Unable to play:", e));
+        }
+      });
+    }
+
+    // Auto-advance to next track when current ends
+    if (bgMusic) {
+      bgMusic.addEventListener("ended", () => {
+        const nextIndex = (currentTrackIndex + 1) % musicPlaylist.length;
+        playTrack(nextIndex);
+        if (isMusicOn) {
+          bgMusic.play().catch(e => console.warn("Unable to play:", e));
+        }
+      });
+    }
+
+    // Initialize on load
+    window.addEventListener("load", () => {
+      initPlaylist();
+      if (musicPlaylist.length > 0) {
+        playTrack(0);
+      }
+    });
 
     // Scroll-based fade-in
     const fadeSections = document.querySelectorAll(".fade-section");
