@@ -203,6 +203,7 @@
     .hero-title span.name {
       background: linear-gradient(135deg, #f79ac1, #f8cf82);
       -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
       position: relative;
     }
@@ -1079,11 +1080,222 @@
         padding: 22px;
       }
     }
+
+    /* Cake Celebration Styles */
+    .cake-section {
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 20px;
+    }
+
+    .cake-container {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .cake-container:hover {
+      transform: scale(1.05);
+    }
+
+    .cake-container.clicked {
+      animation: cakeBounce 0.6s ease;
+    }
+
+    @keyframes cakeBounce {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1.15) rotate(-5deg); }
+      50% { transform: scale(1.2) rotate(5deg); }
+      75% { transform: scale(1.15) rotate(-3deg); }
+    }
+
+    .cake {
+      font-size: 8rem;
+      line-height: 1;
+      position: relative;
+      display: inline-block;
+      filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+      transition: transform 0.3s ease;
+    }
+
+    .cake-sparkles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+    }
+
+    .sparkle {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0;
+      animation: sparkleFloat 2s ease-out forwards;
+    }
+
+    @keyframes sparkleFloat {
+      0% {
+        opacity: 1;
+        transform: translateY(0) scale(0.5);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-100px) scale(1.5);
+      }
+    }
+
+    .cake-message {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    .cake-candles {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 2rem;
+      animation: candleFlicker 1.5s ease-in-out infinite;
+    }
+
+    @keyframes candleFlicker {
+      0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+      50% { opacity: 0.8; transform: translateX(-50%) scale(1.1); }
+    }
+
+    .celebration-text {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fcb7d0, #f8cf82, #fcb7d0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      background-size: 200% auto;
+      animation: gradientShift 3s ease infinite;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .celebration-text.show {
+      display: block;
+      animation: gradientShift 3s ease infinite, textPop 0.5s ease;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+    }
+
+    @keyframes textPop {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Lightbox Styles */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 3000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .lightbox.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lightbox-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: scale(0.8);
+      transition: transform 0.3s ease;
+    }
+
+    .lightbox.show .lightbox-content {
+      transform: scale(1);
+    }
+
+    .lightbox img,
+    .lightbox video {
+      max-width: 100%;
+      max-height: 90vh;
+      width: auto;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+      object-fit: contain;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      font-size: 2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      transition: background 0.2s ease, transform 0.2s ease;
+      z-index: 3001;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .lightbox-close:hover {
+      background: #fff;
+      transform: scale(1.1);
+    }
+
+    .clickable-image {
+      cursor: pointer;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .clickable-image:hover {
+      transform: scale(1.02);
+      opacity: 0.9;
+    }
+
+    .memory-photo,
+    .polaroid-photo,
+    .hero-photo-placeholder {
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
   <!-- Confetti library (only external dependency) -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <button class="lightbox-close" id="lightboxClose" type="button">×</button>
+    <div class="lightbox-content" id="lightboxContent"></div>
+  </div>
 
   <!-- Floating balloons -->
   <div class="balloons">
@@ -1441,20 +1653,24 @@
           <p>Some moments deserve their own frame. These are a few of them.</p>
           <div class="gallery">
             <div class="polaroid">
-              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/3738088/pexels-photo-3738088.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
-              <div class="polaroid-caption">Your laugh in the middle of the crowd.</div>
+              <div class="polaroid-photo" style="background-image: url('ressources/7.jpg');"></div>
             </div>
             <div class="polaroid">
-              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
-              <div class="polaroid-caption">Our “we have no idea what we’re doing but we’re doing it” faces.</div>
+              <div class="polaroid-photo" style="background-image: url('ressources/8.jpg');"></div>
             </div>
             <div class="polaroid">
-              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/1680219/pexels-photo-1680219.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
-              <div class="polaroid-caption">The soft, quiet moments that feel like home.</div>
+              <div class="polaroid-photo">
+                <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <source src="ressources/9.mp4" type="video/mp4">
+                </video>
+              </div>
             </div>
             <div class="polaroid">
-              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/1391487/pexels-photo-1391487.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
-              <div class="polaroid-caption">Every sunset we watched &amp; overanalyzed together.</div>
+              <div class="polaroid-photo">
+                <video autoplay loop muted playsinline style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;">
+                  <source src="ressources/10.mp4" type="video/mp4">
+                </video>
+              </div>
             </div>
           </div>
         </div>
@@ -1528,6 +1744,31 @@
             <span>💌</span>
             <span>Open Your Message</span>
           </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cake Celebration Section -->
+    <section class="cake-section fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">Blow Out the Candles!</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            Make a wish
+          </div>
+        </div>
+        <div class="section-body">
+          <p style="margin-bottom: 24px;">
+            Click on the cake to celebrate and make a wish! 🎂✨
+          </p>
+          <div class="cake-container" id="cakeContainer">
+            <div class="cake-candles">🕯️🕯️🕯️</div>
+            <div class="cake">🎂</div>
+            <div class="cake-sparkles" id="cakeSparkles"></div>
+          </div>
+          <div class="cake-message" id="cakeMessage">Click the cake to celebrate! 🎉</div>
+          <div class="celebration-text" id="celebrationText">HAPPY BIRTHDAY! 🎉🎊🎈</div>
         </div>
       </div>
     </section>
@@ -1695,6 +1936,213 @@
       envelopeContainer.addEventListener("click", (e) => {
         if (e.target === envelopeContainer) {
           closeEnvelope();
+        }
+      });
+    }
+
+    // Lightbox functionality
+    const lightbox = document.getElementById("lightbox");
+    const lightboxContent = document.getElementById("lightboxContent");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    function openLightbox(src, isVideo = false) {
+      lightboxContent.innerHTML = "";
+      if (isVideo) {
+        const video = document.createElement("video");
+        video.src = src;
+        video.controls = true;
+        video.autoplay = true;
+        video.style.maxWidth = "100%";
+        video.style.maxHeight = "90vh";
+        video.style.borderRadius = "12px";
+        lightboxContent.appendChild(video);
+      } else {
+        const img = document.createElement("img");
+        img.src = src;
+        img.alt = "Full size image";
+        lightboxContent.appendChild(img);
+      }
+      lightbox.classList.add("show");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("show");
+      document.body.style.overflow = "";
+      setTimeout(() => {
+        lightboxContent.innerHTML = "";
+      }, 300);
+    }
+
+    if (lightboxClose) {
+      lightboxClose.addEventListener("click", closeLightbox);
+    }
+
+    if (lightbox) {
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          closeLightbox();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && lightbox.classList.contains("show")) {
+          closeLightbox();
+        }
+      });
+    }
+
+    // Make images clickable
+    function makeImageClickable(element, imageSrc) {
+      if (element) {
+        element.style.cursor = "pointer";
+        element.addEventListener("click", () => {
+          openLightbox(imageSrc, false);
+        });
+      }
+    }
+
+    function makeVideoClickable(element, videoSrc) {
+      if (element) {
+        element.style.cursor = "pointer";
+        element.addEventListener("click", () => {
+          openLightbox(videoSrc, true);
+        });
+      }
+    }
+
+    // Wait for page to load, then attach click handlers
+    window.addEventListener("load", () => {
+      // Hero photo
+      const heroPhoto = document.querySelector(".hero-photo-placeholder");
+      if (heroPhoto) {
+        const bgImage = heroPhoto.style.backgroundImage;
+        const imageUrl = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)?.[1];
+        if (imageUrl) {
+          makeImageClickable(heroPhoto, imageUrl);
+        }
+      }
+
+      // First picture together
+      const firstPicture = document.querySelector("#first-picture .hero-photo-placeholder");
+      if (firstPicture) {
+        const bgImage = firstPicture.style.backgroundImage;
+        const imageUrl = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)?.[1];
+        if (imageUrl) {
+          makeImageClickable(firstPicture, imageUrl);
+        }
+      }
+
+      // Memory photos
+      document.querySelectorAll(".memory-photo").forEach((photo) => {
+        const bgImage = photo.style.backgroundImage;
+        if (bgImage) {
+          const imageUrl = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)?.[1];
+          if (imageUrl) {
+            makeImageClickable(photo, imageUrl);
+          }
+        }
+        // Check for video inside
+        const video = photo.querySelector("video source");
+        if (video) {
+          makeVideoClickable(photo, video.src);
+        }
+      });
+
+      // Polaroid photos
+      document.querySelectorAll(".polaroid-photo").forEach((photo) => {
+        const bgImage = photo.style.backgroundImage;
+        if (bgImage) {
+          const imageUrl = bgImage.match(/url\(['"]?([^'"]+)['"]?\)/)?.[1];
+          if (imageUrl) {
+            makeImageClickable(photo, imageUrl);
+          }
+        }
+        // Check for video inside
+        const video = photo.querySelector("video source");
+        if (video) {
+          makeVideoClickable(photo, video.src);
+        }
+      });
+    });
+
+    // Cake Celebration functionality
+    const cakeContainer = document.getElementById("cakeContainer");
+    const cakeMessage = document.getElementById("cakeMessage");
+    const celebrationText = document.getElementById("celebrationText");
+    const cakeSparkles = document.getElementById("cakeSparkles");
+
+    if (cakeContainer) {
+      let clickCount = 0;
+      const messages = [
+        "Click the cake to celebrate! 🎉",
+        "Keep clicking! 🎂",
+        "You're doing great! ✨",
+        "More celebrations! 🎊",
+        "Amazing! Keep going! 🎈",
+        "You're a celebration master! 🌟"
+      ];
+
+      cakeContainer.addEventListener("click", () => {
+        clickCount++;
+        
+        // Add bounce animation
+        cakeContainer.classList.add("clicked");
+        setTimeout(() => {
+          cakeContainer.classList.remove("clicked");
+        }, 600);
+
+        // Launch confetti
+        for (let i = 0; i < 3; i++) {
+          setTimeout(() => {
+            launchConfettiBurst();
+          }, i * 150);
+        }
+
+        // Create sparkles
+        for (let i = 0; i < 8; i++) {
+          setTimeout(() => {
+            const sparkle = document.createElement("div");
+            sparkle.className = "sparkle";
+            sparkle.textContent = ["✨", "⭐", "💫", "🌟"][Math.floor(Math.random() * 4)];
+            sparkle.style.left = Math.random() * 100 + "%";
+            sparkle.style.top = Math.random() * 100 + "%";
+            sparkle.style.animationDelay = Math.random() * 0.5 + "s";
+            cakeSparkles.appendChild(sparkle);
+            
+            setTimeout(() => {
+              sparkle.remove();
+            }, 2000);
+          }, i * 50);
+        }
+
+        // Update message
+        if (clickCount <= messages.length) {
+          cakeMessage.textContent = messages[clickCount - 1];
+        }
+
+        // Show celebration text on first click
+        if (clickCount === 1) {
+          celebrationText.classList.add("show");
+          setTimeout(() => {
+            celebrationText.classList.remove("show");
+          }, 3000);
+        }
+
+        // Special celebration every 5 clicks
+        if (clickCount % 5 === 0) {
+          celebrationText.classList.add("show");
+          setTimeout(() => {
+            celebrationText.classList.remove("show");
+          }, 3000);
+          
+          // Extra confetti burst
+          for (let i = 0; i < 5; i++) {
+            setTimeout(() => {
+              launchConfettiBurst();
+            }, i * 100);
+          }
         }
       });
     }
