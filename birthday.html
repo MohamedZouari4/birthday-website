@@ -1,0 +1,1708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday, Tamtouma! 🎉</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg-gradient: linear-gradient(135deg, #ffeaf4, #fff8e8);
+      --accent: #f4a6c6;
+      --accent-soft: #ffd5e7;
+      --accent-gold: #f3c96b;
+      --text-main: #3b2c3a;
+      --text-muted: #7a6474;
+      --card-bg: rgba(255, 255, 255, 0.9);
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.08);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --transition-fast: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background-image: var(--bg-gradient);
+      color: var(--text-main);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Floating sparkles background */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.5) 0, transparent 45%),
+        radial-gradient(circle at 80% 0%, rgba(255, 220, 248, 0.7) 0, transparent 55%),
+        radial-gradient(circle at 50% 100%, rgba(255, 244, 214, 0.7) 0, transparent 60%);
+      opacity: 0.45;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    /* Simple layout */
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px 18px 64px;
+    }
+
+    /* Glassy navbar */
+    .nav {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 18px;
+    }
+
+    .nav-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(16px);
+      border-radius: 999px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+      align-items: center;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: var(--text-muted);
+      font-size: 0.83rem;
+      padding: 8px 14px;
+      border-radius: 999px;
+      transition: background var(--transition-fast), color var(--transition-fast),
+                  transform var(--transition-fast);
+      white-space: nowrap;
+    }
+
+    .nav a:hover {
+      background: var(--accent-soft);
+      color: var(--text-main);
+      transform: translateY(-1px);
+    }
+
+    .nav a.primary {
+      background: linear-gradient(135deg, #fcb7d0, #f8cf82);
+      color: #3f2834;
+      font-weight: 600;
+      box-shadow: 0 10px 28px rgba(244, 166, 198, 0.45);
+    }
+
+    .nav a.primary:hover {
+      transform: translateY(-1px) scale(1.02);
+    }
+
+    /* Music toggle */
+    .music-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      border: 1px solid rgba(244, 166, 198, 0.4);
+      cursor: pointer;
+      transition: background var(--transition-fast), transform var(--transition-fast),
+                  box-shadow var(--transition-fast);
+    }
+
+    .music-toggle:hover {
+      background: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .music-toggle__dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+    }
+
+    .music-toggle.on .music-toggle__dot {
+      background: #f8cf82;
+    }
+
+    /* Hero section */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px;
+      padding: 28px 24px 28px;
+      margin-bottom: 26px;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.7), transparent 55%),
+                  radial-gradient(circle at 100% 0, rgba(252, 183, 208, 0.52), transparent 60%),
+                  radial-gradient(circle at 0 100%, rgba(248, 207, 130, 0.6), transparent 60%),
+                  #ffeef8;
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(230px, 2.3fr);
+      gap: 22px;
+      align-items: center;
+    }
+
+    .hero-left {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 11px 4px 4px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-bottom: 10px;
+    }
+
+    .hero-kicker span.icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at 30% 15%, #fff, #ffd5e7);
+      box-shadow: 0 8px 18px rgba(246, 173, 203, 0.6);
+      font-size: 0.9rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.1rem, 3vw + 1.2rem, 2.8rem);
+      line-height: 1.05;
+      margin-bottom: 10px;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-title span.name {
+      background: linear-gradient(135deg, #f79ac1, #f8cf82);
+      -webkit-background-clip: text;
+      color: transparent;
+      position: relative;
+    }
+
+    .hero-title span.name::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 100%;
+      height: 8px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.9), transparent);
+      mix-blend-mode: screen;
+      opacity: 0.9;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+      max-width: 36rem;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .hero-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-pill {
+      border-radius: 999px;
+      border: none;
+      padding: 9px 18px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                  background var(--transition-fast), color var(--transition-fast);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #fcb7d0, #f8cf82);
+      color: #43253a;
+      box-shadow: 0 14px 32px rgba(242, 147, 190, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(242, 147, 190, 0.7);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.85);
+      color: var(--text-main);
+      border: 1px solid rgba(244, 166, 198, 0.6);
+    }
+
+    .btn-ghost:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.06);
+    }
+
+    .hero-right {
+      position: relative;
+      height: 100%;
+    }
+
+    .hero-photo-card {
+      position: relative;
+      border-radius: 30px;
+      padding: 16px 16px 18px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.15);
+      transform: rotate(-3deg);
+    }
+
+    .hero-photo-card-inner {
+      border-radius: 24px;
+      overflow: hidden;
+      height: 230px;
+      background: linear-gradient(135deg, #ffcfe1, #fff1c8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-photo-card-inner::after {
+      content: "✨";
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-size: 1.4rem;
+      opacity: 0.8;
+    }
+
+    .hero-photo-placeholder {
+      width: 88%;
+      height: 78%;
+      border-radius: 22px;
+      border: 4px solid rgba(255, 255, 255, 0.95);
+      background-size: cover;
+      background-position: center;
+      background-image: url("1.jpg");
+      box-shadow: 0 16px 35px rgba(189, 85, 138, 0.5);
+    }
+
+    .hero-photo-caption {
+      margin-top: 9px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .hero-photo-caption span.label {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .hero-floating-tag {
+      position: absolute;
+      top: -18px;
+      right: -6px;
+      background: #fff;
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-size: 0.72rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+      animation: floatTag 3.5s ease-in-out infinite;
+    }
+
+    .hero-floating-tag span.dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #f8cf82;
+    }
+
+    @keyframes floatTag {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+
+    /* Floating balloons */
+    .balloons {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .balloon {
+      position: absolute;
+      bottom: -120px;
+      width: 54px;
+      height: 72px;
+      border-radius: 50% 50% 48% 52%;
+      background: radial-gradient(circle at 30% 20%, #fff, #fcb7d0);
+      box-shadow: 0 18px 35px rgba(0, 0, 0, 0.15);
+      animation: floatUp 16s linear infinite;
+      opacity: 0.75;
+    }
+
+    .balloon::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 72px;
+      width: 2px;
+      height: 70px;
+      background: rgba(200, 161, 163, 0.7);
+    }
+
+    .balloon.b2 {
+      left: 15%;
+      animation-duration: 22s;
+      background: radial-gradient(circle at 30% 20%, #fff, #f8cf82);
+      width: 60px;
+      height: 80px;
+      animation-delay: -5s;
+    }
+
+    .balloon.b3 {
+      left: 60%;
+      animation-duration: 19s;
+      background: radial-gradient(circle at 30% 20%, #fff, #b6e3ff);
+      width: 52px;
+      height: 70px;
+      animation-delay: -9s;
+    }
+
+    .balloon.b4 {
+      left: 82%;
+      animation-duration: 24s;
+      background: radial-gradient(circle at 30% 20%, #fff, #ffd5e7);
+      width: 48px;
+      height: 64px;
+      animation-delay: -2s;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(18px, -50vh, 0) scale(1.03);
+      }
+      100% {
+        transform: translate3d(-12px, -110vh, 0) scale(1.05);
+      }
+    }
+
+    /* Sections */
+    section {
+      margin-bottom: 26px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-soft);
+      padding: 20px 20px 22px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: 1.15rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .section-chip {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(248, 207, 130, 0.17);
+      color: #7c6339;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .section-chip span.dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #f3c96b;
+    }
+
+    .section-body {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .section-body p + p {
+      margin-top: 9px;
+    }
+
+    /* Timeline / Story */
+    .timeline {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 13px;
+      margin-top: 4px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 18px minmax(0, 1fr);
+      gap: 12px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .timeline-marker {
+      position: relative;
+      width: 18px;
+      min-height: 100%;
+      display: flex;
+      justify-content: center;
+    }
+
+    .timeline-marker::before {
+      content: "";
+      position: absolute;
+      top: 6px;
+      bottom: -12px;
+      width: 2px;
+      background: linear-gradient(to bottom, #fcb7d0, rgba(252, 183, 208, 0.05));
+      opacity: 0.9;
+    }
+
+    .timeline-marker-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 999px;
+      border: 2px solid #fff;
+      background: radial-gradient(circle at 30% 20%, #fff, #fcb7d0);
+      box-shadow: 0 0 0 3px rgba(252, 183, 208, 0.35);
+      position: relative;
+      z-index: 1;
+    }
+
+    .timeline-content {
+      padding: 9px 11px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.04);
+      border: 1px solid rgba(252, 183, 208, 0.3);
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast),
+                  background var(--transition-fast);
+    }
+
+    .timeline-content:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 30px rgba(0, 0, 0, 0.08);
+      background: #fff;
+    }
+
+    .timeline-tag {
+      font-size: 0.78rem;
+      color: var(--accent);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+
+    .timeline-title {
+      font-size: 0.98rem;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .timeline-text {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* Memories grid */
+    .memories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .memory-card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 10px 10px 12px;
+      box-shadow: 0 16px 35px rgba(0, 0, 0, 0.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .memory-card:nth-child(2n) {
+      transform: rotate(-1.5deg);
+    }
+
+    .memory-card:nth-child(2n + 1) {
+      transform: rotate(1.2deg);
+    }
+
+    .memory-card:hover {
+      transform: translateY(-4px) scale(1.02) rotate(0deg);
+      box-shadow: 0 22px 45px rgba(0, 0, 0, 0.15);
+    }
+
+    .memory-photo {
+      border-radius: 14px;
+      overflow: hidden;
+      height: 145px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+    }
+
+    .memory-photo video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    .memory-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.35), transparent 55%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+    }
+
+    .memory-caption {
+      margin-top: 7px;
+      font-size: 0.86rem;
+      color: var(--text-main);
+    }
+
+    .memory-caption span.date {
+      display: block;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Inside jokes */
+    .jokes-list {
+      list-style: none;
+      margin-top: 4px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .joke-item {
+      border-radius: 999px;
+      padding: 7px 12px;
+      background: rgba(252, 183, 208, 0.12);
+      font-size: 0.88rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background var(--transition-fast), transform var(--transition-fast);
+    }
+
+    .joke-item:hover {
+      background: rgba(252, 183, 208, 0.22);
+      transform: translateY(-1px);
+    }
+
+    .joke-item span.tag {
+      font-size: 0.78rem;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* "What makes you special" */
+    .special-list {
+      list-style: none;
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 8px;
+    }
+
+    .special-item {
+      padding: 9px 11px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(248, 207, 130, 0.35);
+      font-size: 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .special-icon {
+      font-size: 1.1rem;
+      margin-top: 2px;
+    }
+
+    /* Gallery polaroids */
+    .gallery {
+      margin-top: 6px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      justify-items: center;
+    }
+
+    .polaroid {
+      background: #fffefa;
+      border-radius: 12px;
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.18);
+      width: 180px;
+      padding: 10px 10px 14px;
+      text-align: center;
+      transform-origin: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      cursor: pointer;
+    }
+
+    .polaroid:nth-child(2n) {
+      transform: rotate(4deg);
+    }
+
+    .polaroid:nth-child(3n) {
+      transform: rotate(-5deg);
+    }
+
+    .polaroid:hover {
+      transform: translateY(-6px) scale(1.04) rotate(0deg);
+      box-shadow: 0 26px 46px rgba(0, 0, 0, 0.28);
+    }
+
+    .polaroid-photo {
+      width: 100%;
+      height: 130px;
+      border-radius: 8px;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 9px;
+    }
+
+    .polaroid-caption {
+      font-size: 0.83rem;
+      color: var(--text-main);
+    }
+
+    /* Birthday wishes */
+    .wishes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 12px;
+      margin-top: 6px;
+    }
+
+    .wish-card {
+      padding: 10px 11px 12px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(244, 166, 198, 0.3);
+      font-size: 0.92rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .wish-card::before {
+      content: "✧";
+      position: absolute;
+      font-size: 2.1rem;
+      right: 4px;
+      top: -4px;
+      opacity: 0.17;
+      color: #f8cf82;
+    }
+
+    /* Final message */
+    .ending {
+      text-align: center;
+      margin-top: 18px;
+    }
+
+    .ending-main {
+      font-size: 1.4rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .ending-heart {
+      font-size: 1.2rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .ending-note {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      max-width: 34rem;
+      margin: 0 auto 10px;
+    }
+
+    .ending-signature {
+      margin-top: 12px;
+      font-size: 0.92rem;
+      color: var(--text-main);
+    }
+
+    /* Scroll fade-in animation */
+    .fade-section {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .hero {
+        grid-template-columns: 1fr;
+        border-radius: 32px;
+        padding: 20px 16px 20px;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .hero-photo-card-inner {
+        height: 210px;
+      }
+
+      .card {
+        border-radius: 22px;
+        padding: 16px 14px 18px;
+      }
+
+      #first-picture .hero-photo-card {
+        max-width: 100% !important;
+      }
+
+      #first-picture .hero-photo-card-inner {
+        height: 280px !important;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .nav-inner {
+        justify-content: center;
+      }
+
+      .hero-title {
+        font-size: 1.9rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.9rem;
+      }
+
+      .memory-photo {
+        height: 135px;
+      }
+
+      #first-picture .hero-photo-card-inner {
+        height: 250px !important;
+      }
+    }
+
+    /* Envelope Section */
+    .envelope-section {
+      text-align: center;
+      padding: 40px 20px;
+      margin-top: 40px;
+    }
+
+    .envelope-button {
+      background: linear-gradient(135deg, #fcb7d0, #f8cf82);
+      color: #43253a;
+      border: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 999px;
+      cursor: pointer;
+      box-shadow: 0 14px 32px rgba(242, 147, 190, 0.6);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .envelope-button:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(242, 147, 190, 0.7);
+    }
+
+    .envelope-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .envelope-container.show {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .envelope-wrapper {
+      position: relative;
+      width: 400px;
+      height: 300px;
+      perspective: 1000px;
+    }
+
+    .envelope {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+    }
+
+    .envelope-body {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 360px;
+      height: 240px;
+      background: linear-gradient(135deg, #fff8e8, #ffeaf4);
+      border: 3px solid #f4a6c6;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .envelope-flap {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) rotateX(0deg);
+      transform-origin: bottom;
+      width: 360px;
+      height: 240px;
+      background: linear-gradient(135deg, #ffeaf4, #fff8e8);
+      border: 3px solid #f4a6c6;
+      border-bottom: none;
+      border-radius: 12px 12px 0 0;
+      transition: transform 0.6s ease;
+      z-index: 2;
+    }
+
+    .envelope.open .envelope-flap {
+      transform: translateX(-50%) rotateX(-180deg);
+    }
+
+    .envelope-heart {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 2.5rem;
+      opacity: 0.3;
+      z-index: 1;
+    }
+
+    .letter {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      width: 340px;
+      min-height: 300px;
+      max-height: 500px;
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: transform 0.8s ease 0.3s, opacity 0.8s ease 0.3s;
+      z-index: 3;
+      overflow-y: auto;
+    }
+
+    .envelope.open .letter {
+      transform: translateX(-50%) translateY(-40px);
+      opacity: 1;
+    }
+
+    .letter-content {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-main);
+      text-align: left;
+    }
+
+    .letter-greeting {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: var(--accent);
+    }
+
+    .letter-message {
+      margin-bottom: 12px;
+    }
+
+    .letter-closing {
+      margin-top: 16px;
+      text-align: right;
+      font-style: italic;
+      color: var(--text-muted);
+    }
+
+    .letter-heart {
+      text-align: center;
+      font-size: 1.5rem;
+      margin: 12px 0;
+    }
+
+    .close-envelope {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-main);
+      transition: transform 0.2s ease, background 0.2s ease;
+      z-index: 1001;
+    }
+
+    .close-envelope:hover {
+      transform: scale(1.1);
+      background: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .envelope-wrapper {
+        width: 320px;
+        height: 240px;
+      }
+
+      .envelope-body,
+      .envelope-flap {
+        width: 300px;
+        height: 200px;
+      }
+
+      .letter {
+        width: 280px;
+        min-height: 250px;
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Confetti library (only external dependency) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <!-- Floating balloons -->
+  <div class="balloons">
+    <div class="balloon b1" style="left: 5%;"></div>
+    <div class="balloon b2"></div>
+    <div class="balloon b3"></div>
+    <div class="balloon b4"></div>
+  </div>
+
+  <div class="page">
+    <!-- Sticky Nav -->
+    <nav class="nav">
+      <div class="nav-inner">
+        <a href="#hero" class="primary">Top 🎉</a>
+        <a href="#how-we-met">How We Met</a>
+        <a href="#first-picture">First Picture</a>
+        <a href="#memories">Favorite Memories</a>
+        <a href="#jokes">Inside Jokes</a>
+        <a href="#special">What Makes You Special</a>
+        <a href="#wishes">Birthday Wishes</a>
+        <button id="musicToggle" class="music-toggle" type="button">
+          <span class="music-toggle__dot">♪</span>
+          <span>Music off</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Hidden audio (replace src with your own mp3 path if you have one) -->
+    <audio id="bgMusic" loop>
+      <!-- Example: <source src="your-birthday-song.mp3" type="audio/mpeg" /> -->
+      <source src="" type="audio/mpeg" />
+    </audio>
+
+    <!-- Hero / Opening -->
+    <section id="hero" class="hero fade-section">
+      <div class="hero-left">
+        <div class="hero-kicker">
+          <span class="icon">🎂</span>
+          To the one who turns ordinary days into memories
+        </div>
+        <h1 class="hero-title">
+          Happy Birthday,<br />
+          <span class="name">Tamtouma</span> ✨
+        </h1>
+        <p class="hero-subtitle">
+          Today is about you, my favorite human. This little corner of the internet is a scrapbook of our
+          friendship the way you make me laugh, feel seen, and believe that the world is softer and
+          brighter with you in it.
+        </p>
+        <div class="hero-meta">
+          <span>From: your chaos partner &amp; biggest fan 💖</span>
+        </div>
+        <div class="hero-cta">
+          <button id="celebrateBtn" class="btn-pill btn-primary" type="button">
+            <span>Celebrate!</span> <span>🎉</span>
+          </button>
+          <a href="#wishes" class="btn-pill btn-ghost">
+            Jump to birthday wishes ↴
+          </a>
+        </div>
+      </div>
+      <div class="hero-right">
+        <div class="hero-photo-card">
+          <div class="hero-floating-tag">
+            <span class="dot"></span>
+            Us against the world
+          </div>
+          <div class="hero-photo-card-inner">
+            <div class="hero-photo-placeholder"></div>
+          </div>
+          <div class="hero-photo-caption">
+            <span class="label">You + Me</span>
+            <span>Somewhere between laughter &amp; chaos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How we met / Timeline -->
+    <section id="how-we-met" class="fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">How it all began</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            Our origin story
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            I still can't believe that out of all the people in the world, the universe quietly nudged us into
+            the same place, at the same time and decided, "Yep, these two belong in each other's lives."
+          </p>
+
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-marker-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-tag">Chapter One</div>
+                <div class="timeline-title">A simple conversation about IEEE</div>
+                <div class="timeline-text">
+                  We began with just a small conversation on social media about IEEE nothing special, just a simple exchange. A little misunderstanding happened, but somehow it led us to talk more, and on <strong>31 October 2025</strong>, everything changed.
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-marker-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-tag">October 31, 2025</div>
+                <div class="timeline-title">When everything changed</div>
+                <div class="timeline-text">
+                  That day, we started discovering each other… discovering how similar we are, how our thoughts match, how our personalities fit. It felt like meeting someone who understands parts of me I never said out loud.
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-marker-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-tag">Three beautiful days</div>
+                <div class="timeline-title">Every emotion, all at once</div>
+                <div class="timeline-text">
+                  Those three days we spent talking were truly some of the most beautiful days of my life. I felt everything I laughed, I cried, I felt the good and the bad, the comfort, the chaos, the happiness… every emotion all at once, and all of it felt real.
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-marker-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-tag">The theatre</div>
+                <div class="timeline-title">When time slowed down</div>
+                <div class="timeline-text">
+                  And then the moment we went to the theatre together… I don't know how to describe it, but it felt special. Like time slowed down for a bit.
+                </div>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-marker">
+                <div class="timeline-marker-dot"></div>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-tag">Forever grateful</div>
+                <div class="timeline-title">Thank you, for all of it</div>
+                <div class="timeline-text">
+                  I'm honestly grateful for every moment we shared. Thank you… for all of it.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- First Picture Together -->
+    <section id="first-picture" class="fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">Our first picture together</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            A moment frozen in time
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            Our first picture together taken after the theatre. A simple moment that marked the beginning of something beautiful.
+          </p>
+          <div style="display: flex; justify-content: center; margin-top: 20px;">
+            <div class="hero-photo-card" style="max-width: 450px; width: 100%; transform: rotate(0deg);">
+              <div class="hero-photo-card-inner" style="height: 350px;">
+                <div class="hero-photo-placeholder" style="width: 90%; height: 85%; background-image: url('6.jpg');"></div>
+              </div>
+              <div class="hero-photo-caption" style="justify-content: center; text-align: center; flex-direction: column; gap: 4px;">
+                <span class="label">Our First Picture Together</span>
+                <span>A memory I'll treasure forever</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Favorite Memories -->
+    <section id="memories" class="fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">Favorite memories together</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            The highlight reel
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            If I could bottle up moments with you, these are the ones I’d keep on a shelf and replay on the
+            rainy days.
+          </p>
+          <div class="memories-grid">
+            <div class="memory-card">
+              <div class="memory-photo" style="background-image: url('2.jpg');"></div>
+              <div class="memory-caption">
+                <span class="date">CSTAM</span>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <div class="memory-photo" style="background-image: url('3.jpg');"></div>
+              <div class="memory-caption">
+                <span class="date">CSTAM</span>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <div class="memory-photo" style="background-image: url('4.jpg');"></div>
+              <div class="memory-caption">
+                <span class="date">CSTAM</span>
+              </div>
+            </div>
+
+            <div class="memory-card">
+              <div class="memory-photo">
+                <video autoplay loop muted playsinline>
+                  <source src="5.mp4" type="video/mp4">
+                </video>
+              </div>
+              <div class="memory-caption">
+                <span class="date">CSTAM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inside Jokes -->
+    <section id="jokes" class="fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">Our ridiculous inside jokes</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            If you know, you know
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            These are the things that would make zero sense to anyone else — and that’s exactly why I love
+            them.
+          </p>
+          <ul class="jokes-list">
+            <li class="joke-item">
+              <span class="tag">01</span>
+              <span>“[Your inside joke phrase here]” — instant chaos, guaranteed giggles.</span>
+            </li>
+            <li class="joke-item">
+              <span class="tag">02</span>
+              <span>The legendary <strong>[funny place / moment]</strong> incident we still bring up every
+                time we’re too calm for too long.</span>
+            </li>
+            <li class="joke-item">
+              <span class="tag">03</span>
+              <span>Our overly dramatic <strong>[shared obsession – show / food / song]</strong> reactions.
+                We don’t just like it, we <em>perform</em> it.</span>
+            </li>
+            <li class="joke-item">
+              <span class="tag">04</span>
+              <span>When one look across the room becomes a whole conversation only we understand.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- What makes her special -->
+    <section id="special" class="fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">What makes you so, so special</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            Things I adore about you
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            You’re not just “a good friend.” You are the kind of person who quietly rewires what someone
+            believes about love, loyalty, and feeling safe.
+          </p>
+          <ul class="special-list">
+            <li class="special-item">
+              <span class="special-icon">🤍</span>
+              <span>
+                The way you listen like every word matters — no distractions, no rushing, just pure presence.
+              </span>
+            </li>
+            <li class="special-item">
+              <span class="special-icon">🌤️</span>
+              <span>
+                Your laugh. The way it fills a room, softens the edges of a hard day, and makes everything
+                feel lighter.
+              </span>
+            </li>
+            <li class="special-item">
+              <span class="special-icon">🧠</span>
+              <span>
+                Your brain — sharp, curious, brilliantly silly when it wants to be, and always full of the
+                most unexpected thoughts.
+              </span>
+            </li>
+            <li class="special-item">
+              <span class="special-icon">🛟</span>
+              <span>
+                The way you show up when things aren’t pretty. You don’t run from the messy parts; you sit
+                with them, holding space and holding hands.
+              </span>
+            </li>
+            <li class="special-item">
+              <span class="special-icon">✨</span>
+              <span>
+                How you somehow make people feel seen — like they matter, like they are allowed to take up
+                space exactly as they are.
+              </span>
+            </li>
+            <li class="special-item">
+              <span class="special-icon">🌱</span>
+              <span>
+                Your growth. Watching you become more you every year is one of my favorite things in the
+                world.
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">Little snapshots of us</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            Our polaroid wall
+          </div>
+        </div>
+        <div class="section-body">
+          <p>Some moments deserve their own frame. These are a few of them.</p>
+          <div class="gallery">
+            <div class="polaroid">
+              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/3738088/pexels-photo-3738088.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+              <div class="polaroid-caption">Your laugh in the middle of the crowd.</div>
+            </div>
+            <div class="polaroid">
+              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/3184423/pexels-photo-3184423.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+              <div class="polaroid-caption">Our “we have no idea what we’re doing but we’re doing it” faces.</div>
+            </div>
+            <div class="polaroid">
+              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/1680219/pexels-photo-1680219.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+              <div class="polaroid-caption">The soft, quiet moments that feel like home.</div>
+            </div>
+            <div class="polaroid">
+              <div class="polaroid-photo" style="background-image: url('https://images.pexels.com/photos/1391487/pexels-photo-1391487.jpeg?auto=compress&cs=tinysrgb&w=800');"></div>
+              <div class="polaroid-caption">Every sunset we watched &amp; overanalyzed together.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Birthday wishes -->
+    <section id="wishes" class="fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">Birthday wishes for you</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            A little spell for your new year
+          </div>
+        </div>
+        <div class="section-body">
+          <p>
+            For this new chapter of your life, here’s what I’m silently wishing for you — every time I think
+            of you, every time I’m grateful you exist.
+          </p>
+          <div class="wishes-grid">
+            <div class="wish-card">
+              That you always feel surrounded by people who see you the way I do — brilliant, worthy,
+              irreplaceable.
+            </div>
+            <div class="wish-card">
+              That the things you dream about in quiet moments start gently unfolding into your real life.
+            </div>
+            <div class="wish-card">
+              That on the hard days, you remember: you don’t have to be strong alone. I’m here. Always.
+            </div>
+            <div class="wish-card">
+              That you never, ever forget how loved you are — not just today, but on all the very normal
+              Tuesdays in between.
+            </div>
+          </div>
+
+          <div class="ending">
+            <div class="ending-heart">💗</div>
+            <div class="ending-main">Happy birthday, my favorite person.</div>
+            <p class="ending-note">
+              Thank you for being my safe place, my chaos buddy, my soul friend. The world gets you for one
+              more year — and I’m just grateful I get a front-row seat to all the versions of you that are
+              still on their way.
+            </p>
+            <div class="ending-signature">
+              With all the love and too many feelings,<br />
+              <strong>[Your Name]</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Envelope Section -->
+    <section class="envelope-section fade-section">
+      <div class="card">
+        <div class="card-header">
+          <h2 class="section-title">A Special Message</h2>
+          <div class="section-chip">
+            <span class="dot"></span>
+            Just for you
+          </div>
+        </div>
+        <div class="section-body">
+          <p style="margin-bottom: 24px;">
+            Click the button below to open a special message just for you 💌
+          </p>
+          <button id="openEnvelopeBtn" class="envelope-button" type="button">
+            <span>💌</span>
+            <span>Open Your Message</span>
+          </button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Envelope Modal -->
+  <div id="envelopeContainer" class="envelope-container">
+    <button class="close-envelope" id="closeEnvelopeBtn" type="button">×</button>
+    <div class="envelope-wrapper">
+      <div id="envelope" class="envelope">
+        <div class="envelope-body"></div>
+        <div class="envelope-flap">
+          <div class="envelope-heart">💖</div>
+        </div>
+        <div class="letter">
+          <div class="letter-content">
+            <div class="letter-greeting">Dear Tamtouma,</div>
+            <div class="letter-message">
+              I wanted to write you something special, something that captures how I feel about you. You are not just a friend to me—you are someone who makes my world brighter, who makes me laugh until my stomach hurts, and who makes me feel understood in ways I never knew were possible.
+            </div>
+            <div class="letter-message">
+              Every moment we've shared, from our first conversation to the theatre, from the chaos to the quiet moments—they all mean the world to me. You have this incredible way of making ordinary days feel extraordinary.
+            </div>
+            <div class="letter-heart">💕</div>
+            <div class="letter-message">
+              On your special day, I want you to know that you are loved, cherished, and appreciated more than words can express. Thank you for being you, for being in my life, and for being the amazing person you are.
+            </div>
+            <div class="letter-closing">
+              Forever grateful,<br />
+              Your chaos partner & biggest fan 💖
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Confetti on load + button
+    function launchConfettiBurst() {
+      if (typeof confetti === "undefined") return;
+
+      const defaults = {
+        spread: 70,
+        ticks: 90,
+        gravity: 0.8,
+        decay: 0.9,
+        startVelocity: 40
+      };
+
+      confetti({
+        ...defaults,
+        particleCount: 80,
+        origin: { x: 0.15, y: 0.85 },
+        colors: ["#fcb7d0", "#f8cf82", "#fff"],
+      });
+
+      confetti({
+        ...defaults,
+        particleCount: 100,
+        origin: { x: 0.8, y: 0.85 },
+        colors: ["#fcb7d0", "#bce4ff", "#fff"],
+      });
+    }
+
+    window.addEventListener("load", () => {
+      setTimeout(launchConfettiBurst, 600);
+    });
+
+    const celebrateBtn = document.getElementById("celebrateBtn");
+    if (celebrateBtn) {
+      celebrateBtn.addEventListener("click", () => {
+        launchConfettiBurst();
+        launchConfettiBurst();
+      });
+    }
+
+    // Background music toggle
+    const musicToggle = document.getElementById("musicToggle");
+    const bgMusic = document.getElementById("bgMusic");
+
+    let isMusicOn = false;
+
+    function updateMusicToggle() {
+      if (!musicToggle) return;
+      musicToggle.classList.toggle("on", isMusicOn);
+      const label = musicToggle.querySelector("span:last-child");
+      if (label) {
+        label.textContent = isMusicOn ? "Music on" : "Music off";
+      }
+    }
+
+    if (musicToggle && bgMusic) {
+      musicToggle.addEventListener("click", async () => {
+        try {
+          if (!isMusicOn) {
+            // Only attempt to play if a source is actually set
+            const src = bgMusic.querySelector("source")?.getAttribute("src");
+            if (!src) {
+              alert("You can add a song by editing this page and setting your own MP3 file. 🎵");
+              return;
+            }
+            await bgMusic.play();
+            isMusicOn = true;
+          } else {
+            bgMusic.pause();
+            isMusicOn = false;
+          }
+          updateMusicToggle();
+        } catch (e) {
+          console.warn("Unable to play music automatically:", e);
+        }
+      });
+    }
+
+    // Scroll-based fade-in
+    const fadeSections = document.querySelectorAll(".fade-section");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    fadeSections.forEach((section) => observer.observe(section));
+
+    // Optional: click on polaroid pops confetti
+    document.querySelectorAll(".polaroid").forEach((card) => {
+      card.addEventListener("click", launchConfettiBurst);
+    });
+
+    // Envelope animation
+    const openEnvelopeBtn = document.getElementById("openEnvelopeBtn");
+    const closeEnvelopeBtn = document.getElementById("closeEnvelopeBtn");
+    const envelopeContainer = document.getElementById("envelopeContainer");
+    const envelope = document.getElementById("envelope");
+
+    if (openEnvelopeBtn && envelopeContainer && envelope) {
+      openEnvelopeBtn.addEventListener("click", () => {
+        envelopeContainer.classList.add("show");
+        setTimeout(() => {
+          envelope.classList.add("open");
+          launchConfettiBurst();
+        }, 100);
+      });
+
+      function closeEnvelope() {
+        envelope.classList.remove("open");
+        setTimeout(() => {
+          envelopeContainer.classList.remove("show");
+        }, 600);
+      }
+
+      if (closeEnvelopeBtn) {
+        closeEnvelopeBtn.addEventListener("click", closeEnvelope);
+      }
+
+      envelopeContainer.addEventListener("click", (e) => {
+        if (e.target === envelopeContainer) {
+          closeEnvelope();
+        }
+      });
+    }
+  </script>
+</body>
+</html>
+
+
